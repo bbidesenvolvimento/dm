@@ -27,6 +27,15 @@ return array(
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
+
+		'importcsv'=>array(
+            'path'=>'upload/importCsv/', // path to folder for saving csv file and file with import params
+            'components'=>array(
+			array('messages' => array(
+                    'class'=>'CPhpMessageSource',
+                    'basePath'=>'protected/modules/importcsv/messages',
+                )))
+        ),
 		
 	),
 
@@ -45,20 +54,30 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
-		),
-		*/
+		),*/
+		
 		/*'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),*/
 		// uncomment the following to use a MySQL database
 		
-		'db'=>array(
+		/*'db'=>array(
 			'connectionString' => 'mysql:host=rdsbbi.c4y8ceg16n1f.us-west-2.rds.amazonaws.com;dbname=dmbbi',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'pieigual3,1415',
 			'charset' => 'utf8',
+		),*/
+
+		'db'=>array(
+			'connectionString' => 'mysql:host=localhost;dbname=dmbbi',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => 'root',
+			'charset' => 'utf8',
 		),
+
+
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
