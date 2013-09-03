@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List StatusBanco', 'url'=>array('index')),
-	array('label'=>'Create StatusBanco', 'url'=>array('create')),
-	array('label'=>'View StatusBanco', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage StatusBanco', 'url'=>array('admin')),
+	array('label'=>'Listar StatusBanco', 'url'=>array('index')),
+	array('label'=>'Criar StatusBanco', 'url'=>array('create')),
+	array('label'=>'Visualizar StatusBanco', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciar StatusBanco', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update StatusBanco <?php echo $model->id; ?></h1>
+<h1>Atualizar StatusBanco <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

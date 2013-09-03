@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Bancos'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Banco', 'url'=>array('index')),
-	array('label'=>'Manage Banco', 'url'=>array('admin')),
+	array('label'=>'Listar Banco', 'url'=>array('index')),
+	array('label'=>'Gerenciar Banco', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Banco</h1>
+<h1>Criar Banco</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

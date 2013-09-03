@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Campo Tipos'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List CampoTipo', 'url'=>array('index')),
-	array('label'=>'Manage CampoTipo', 'url'=>array('admin')),
+	array('label'=>'Listar CampoTipo', 'url'=>array('index')),
+	array('label'=>'Gerenciar CampoTipo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create CampoTipo</h1>
+<h1>Criar CampoTipo</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

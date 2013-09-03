@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Campo', 'url'=>array('index')),
-	array('label'=>'Create Campo', 'url'=>array('create')),
-	array('label'=>'View Campo', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Campo', 'url'=>array('admin')),
+	array('label'=>'Listar Campo', 'url'=>array('index')),
+	array('label'=>'Criar Campo', 'url'=>array('create')),
+	array('label'=>'Visualizar Campo', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciar Campo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Campo <?php echo $model->id; ?></h1>
+<h1>Atualizar Campo <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -8,22 +8,12 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'cliente-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nome'); ?>
@@ -45,7 +35,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'senha'); ?>
-		<?php echo $form->textField($model,'senha',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'senha',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'senha'); ?>
 	</div>
 
@@ -56,7 +46,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Criar' : 'Salvar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

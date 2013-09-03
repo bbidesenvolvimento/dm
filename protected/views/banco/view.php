@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Banco', 'url'=>array('index')),
-	array('label'=>'Create Banco', 'url'=>array('create')),
-	array('label'=>'Update Banco', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Banco', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Banco', 'url'=>array('admin')),
+	array('label'=>'Listar Banco', 'url'=>array('index')),
+	array('label'=>'Criar Banco', 'url'=>array('create')),
+	array('label'=>'Atualizar Banco', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Deletar Banco', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Tem certeza que deseja deletar este item?')),
+	array('label'=>'Gerenciar Banco', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Banco #<?php echo $model->id; ?></h1>
+<h1>Visualizar Banco #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

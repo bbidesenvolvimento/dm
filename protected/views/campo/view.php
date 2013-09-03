@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Campo', 'url'=>array('index')),
-	array('label'=>'Create Campo', 'url'=>array('create')),
-	array('label'=>'Update Campo', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Campo', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Campo', 'url'=>array('admin')),
+	array('label'=>'Listar Campo', 'url'=>array('index')),
+	array('label'=>'Criar Campo', 'url'=>array('create')),
+	array('label'=>'Atualizar Campo', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Deletar Campo', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Tem certeza que deseja deletar este item?')),
+	array('label'=>'Gerenciar Campo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Campo #<?php echo $model->id; ?></h1>
+<h1>Visualizar Campo #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

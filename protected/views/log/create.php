@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Logs'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Log', 'url'=>array('index')),
-	array('label'=>'Manage Log', 'url'=>array('admin')),
+	array('label'=>'Listar Log', 'url'=>array('index')),
+	array('label'=>'Gerenciar Log', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Log</h1>
+<h1>Criar Log</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

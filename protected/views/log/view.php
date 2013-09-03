@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Log', 'url'=>array('index')),
-	array('label'=>'Create Log', 'url'=>array('create')),
-	array('label'=>'Update Log', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Log', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Log', 'url'=>array('admin')),
+	array('label'=>'Listar Log', 'url'=>array('index')),
+	array('label'=>'Criar Log', 'url'=>array('create')),
+	array('label'=>'Atualizar Log', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Deletar Log', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Tem certeza que deseja deletar este item?')),
+	array('label'=>'Gerenciar Log', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Log #<?php echo $model->id; ?></h1>
+<h1>Visualizar Log #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

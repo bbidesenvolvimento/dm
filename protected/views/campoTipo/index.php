@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create CampoTipo', 'url'=>array('create')),
-	array('label'=>'Manage CampoTipo', 'url'=>array('admin')),
+	array('label'=>'Criar CampoTipo', 'url'=>array('create')),
+	array('label'=>'Gerenciar CampoTipo', 'url'=>array('admin')),
 );
 ?>
 

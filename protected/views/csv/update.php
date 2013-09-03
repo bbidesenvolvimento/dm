@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Csv', 'url'=>array('index')),
-	array('label'=>'Create Csv', 'url'=>array('create')),
-	array('label'=>'View Csv', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Csv', 'url'=>array('admin')),
+	array('label'=>'Listar Csv', 'url'=>array('index')),
+	array('label'=>'Criar Csv', 'url'=>array('create')),
+	array('label'=>'Visualizar Csv', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciar Csv', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Csv <?php echo $model->id; ?></h1>
+<h1>Atualizar Csv <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

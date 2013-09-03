@@ -28,7 +28,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'tamanho'); ?>
-		<?php echo $form->textField($model,'tamanho',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'tamanho'); ?>
 	</div>
 
 	<div class="row">
@@ -52,7 +52,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

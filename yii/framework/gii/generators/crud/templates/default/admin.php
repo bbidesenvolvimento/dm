@@ -12,13 +12,13 @@
 $label=$this->pluralize($this->class2name($this->modelClass));
 echo "\$this->breadcrumbs=array(
 	'$label'=>array('index'),
-	'Manage',
+	'Gerenciar',
 );\n";
 ?>
 
 $this->menu=array(
-	array('label'=>'List <?php echo $this->modelClass; ?>', 'url'=>array('index')),
-	array('label'=>'Create <?php echo $this->modelClass; ?>', 'url'=>array('create')),
+	array('label'=>'Listar <?php echo $this->modelClass; ?>', 'url'=>array('index')),
+	array('label'=>'Criar <?php echo $this->modelClass; ?>', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -27,7 +27,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#<?php echo $this->class2id($this->modelClass); ?>-grid').yiiGridView('update', {
+	$.fn.yiiGridView.update('<?php echo $this->class2id($this->modelClass); ?>-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -35,14 +35,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage <?php echo $this->pluralize($this->class2name($this->modelClass)); ?></h1>
+<h1>Gerenciar <?php echo $this->pluralize($this->class2name($this->modelClass)); ?></h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Opcionalmente você pode utiliar simbolos de comparação (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+ou <b>=</b>) no inicio de cada valor para refinar a pesquisa.
 </p>
 
-<?php echo "<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>"; ?>
+<?php echo "<?php echo CHtml::link('Busca avançada','#',array('class'=>'search-button')); ?>"; ?>
 
 <div class="search-form" style="display:none">
 <?php echo "<?php \$this->renderPartial('_search',array(

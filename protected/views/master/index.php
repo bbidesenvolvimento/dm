@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Master', 'url'=>array('create')),
-	array('label'=>'Manage Master', 'url'=>array('admin')),
+	array('label'=>'Criar Master', 'url'=>array('create')),
+	array('label'=>'Gerenciar Master', 'url'=>array('admin')),
 );
 ?>
 

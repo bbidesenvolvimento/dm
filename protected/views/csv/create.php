@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Csvs'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Csv', 'url'=>array('index')),
-	array('label'=>'Manage Csv', 'url'=>array('admin')),
+	array('label'=>'Listar Csv', 'url'=>array('index')),
+	array('label'=>'Gerenciar Csv', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Csv</h1>
+<h1>Criar Csv</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

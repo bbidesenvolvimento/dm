@@ -30,13 +30,13 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'CSV', 'url'=>array('/importcsv')),
-				array('label'=>'Banco', 'url'=>array('/banco')),
+				array('label'=>'CSV', 'url'=>array('/importcsv'),'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Banco', 'url'=>array('/banco'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Status Banco', 'url'=>array('/statusBanco'),'visible'=>(Yii::app()->user->id=='admin' ? 1 : 0)),
-				array('label'=>'Campos', 'url'=>array('/campo')),
+				array('label'=>'Campos', 'url'=>array('/campo'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Campo Tipo', 'url'=>array('/campoTipo'),'visible'=>(Yii::app()->user->id=='admin' ? 1 : 0)),
-				array('label'=>'Log', 'url'=>array('/log')),
-				array('label'=>'Usuarios', 'url'=>array('/usuario')),
+				array('label'=>'Log', 'url'=>array('/log'),'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Usuarios', 'url'=>array('/usuario'),'visible'=>!Yii::app()->user->isGuest),
 				/*array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),*/
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

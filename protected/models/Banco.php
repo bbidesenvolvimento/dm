@@ -10,8 +10,8 @@
  * @property integer $cliente_id
  *
  * The followings are the available model relations:
- * @property StatusBanco $statusBanco
  * @property Cliente $cliente
+ * @property StatusBanco $statusBanco
  * @property Campo[] $campos
  */
 class Banco extends CActiveRecord
@@ -32,8 +32,8 @@ class Banco extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, status_banco_id, cliente_id', 'required'),
-			array('id, status_banco_id, cliente_id', 'numerical', 'integerOnly'=>true),
+			array('status_banco_id, cliente_id', 'required'),
+			array('status_banco_id, cliente_id', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -49,8 +49,8 @@ class Banco extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'statusBanco' => array(self::BELONGS_TO, 'StatusBanco', 'status_banco_id'),
 			'cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
+			'statusBanco' => array(self::BELONGS_TO, 'StatusBanco', 'status_banco_id'),
 			'campos' => array(self::HAS_MANY, 'Campo', 'banco_id'),
 		);
 	}

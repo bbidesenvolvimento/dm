@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Csv', 'url'=>array('index')),
-	array('label'=>'Create Csv', 'url'=>array('create')),
-	array('label'=>'Update Csv', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Csv', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Csv', 'url'=>array('admin')),
+	array('label'=>'Listar Csv', 'url'=>array('index')),
+	array('label'=>'Criar Csv', 'url'=>array('create')),
+	array('label'=>'Atualizar Csv', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Deletar Csv', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Tem certeza que deseja deletar este item?')),
+	array('label'=>'Gerenciar Csv', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Csv #<?php echo $model->id; ?></h1>
+<h1>Visualizar Csv #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

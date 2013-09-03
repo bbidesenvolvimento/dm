@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Masters'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Master', 'url'=>array('index')),
-	array('label'=>'Manage Master', 'url'=>array('admin')),
+	array('label'=>'Listar Master', 'url'=>array('index')),
+	array('label'=>'Gerenciar Master', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Master</h1>
+<h1>Criar Master</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

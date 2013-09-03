@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Csv', 'url'=>array('create')),
-	array('label'=>'Manage Csv', 'url'=>array('admin')),
+	array('label'=>'Criar Csv', 'url'=>array('create')),
+	array('label'=>'Gerenciar Csv', 'url'=>array('admin')),
 );
 ?>
 

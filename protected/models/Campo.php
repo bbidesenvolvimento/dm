@@ -7,7 +7,7 @@
  * @property integer $id
  * @property string $nome
  * @property string $tipo
- * @property string $tamanho
+ * @property integer $tamanho
  * @property string $padrao
  * @property integer $banco_id
  * @property integer $cliente_id
@@ -15,8 +15,8 @@
  *
  * The followings are the available model relations:
  * @property Banco $banco
- * @property Cliente $cliente
  * @property CampoTipo $campoTipo
+ * @property Cliente $cliente
  */
 class Campo extends CActiveRecord
 {
@@ -37,8 +37,8 @@ class Campo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('banco_id, cliente_id, campo_tipo_id', 'required'),
-			array('banco_id, cliente_id, campo_tipo_id', 'numerical', 'integerOnly'=>true),
-			array('nome, tipo, tamanho, padrao', 'length', 'max'=>45),
+			array('tamanho, banco_id, cliente_id, campo_tipo_id', 'numerical', 'integerOnly'=>true),
+			array('nome, tipo, padrao', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nome, tipo, tamanho, padrao, banco_id, cliente_id, campo_tipo_id', 'safe', 'on'=>'search'),
@@ -54,8 +54,8 @@ class Campo extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'banco' => array(self::BELONGS_TO, 'Banco', 'banco_id'),
-			'cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
 			'campoTipo' => array(self::BELONGS_TO, 'CampoTipo', 'campo_tipo_id'),
+			'cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
 		);
 	}
 
@@ -97,7 +97,7 @@ class Campo extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nome',$this->nome,true);
 		$criteria->compare('tipo',$this->tipo,true);
-		$criteria->compare('tamanho',$this->tamanho,true);
+		$criteria->compare('tamanho',$this->tamanho);
 		$criteria->compare('padrao',$this->padrao,true);
 		$criteria->compare('banco_id',$this->banco_id);
 		$criteria->compare('cliente_id',$this->cliente_id);

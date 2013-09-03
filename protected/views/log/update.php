@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Log', 'url'=>array('index')),
-	array('label'=>'Create Log', 'url'=>array('create')),
-	array('label'=>'View Log', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Log', 'url'=>array('admin')),
+	array('label'=>'Listar Log', 'url'=>array('index')),
+	array('label'=>'Criar Log', 'url'=>array('create')),
+	array('label'=>'Visualizar Log', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciar Log', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Log <?php echo $model->id; ?></h1>
+<h1>Atualizar Log <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

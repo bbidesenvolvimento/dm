@@ -33,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'senha'); ?>
-		<?php echo $form->textField($model,'senha',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'senha',array('size'=>50,'maxlength'=>50)); ?>
 	</div>
 
 	<div class="row">
@@ -42,7 +42,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cliente', 'url'=>array('index')),
-	array('label'=>'Create Cliente', 'url'=>array('create')),
-	array('label'=>'View Cliente', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Cliente', 'url'=>array('admin')),
+	array('label'=>'Listar Cliente', 'url'=>array('index')),
+	array('label'=>'Criar Cliente', 'url'=>array('create')),
+	array('label'=>'Visualizar Cliente', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciar Cliente', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Cliente <?php echo $model->id; ?></h1>
+<h1>Atualizar Cliente <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

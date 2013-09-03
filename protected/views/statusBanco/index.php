@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create StatusBanco', 'url'=>array('create')),
-	array('label'=>'Manage StatusBanco', 'url'=>array('admin')),
+	array('label'=>'Criar StatusBanco', 'url'=>array('create')),
+	array('label'=>'Gerenciar StatusBanco', 'url'=>array('admin')),
 );
 ?>
 

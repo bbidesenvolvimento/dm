@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Banco', 'url'=>array('create')),
-	array('label'=>'Manage Banco', 'url'=>array('admin')),
+	array('label'=>'Criar Banco', 'url'=>array('create')),
+	array('label'=>'Gerenciar Banco', 'url'=>array('admin')),
 );
 ?>
 

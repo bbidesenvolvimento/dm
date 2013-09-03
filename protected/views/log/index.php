@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Log', 'url'=>array('create')),
-	array('label'=>'Manage Log', 'url'=>array('admin')),
+	array('label'=>'Criar Log', 'url'=>array('create')),
+	array('label'=>'Gerenciar Log', 'url'=>array('admin')),
 );
 ?>
 

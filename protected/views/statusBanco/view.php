@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List StatusBanco', 'url'=>array('index')),
-	array('label'=>'Create StatusBanco', 'url'=>array('create')),
-	array('label'=>'Update StatusBanco', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete StatusBanco', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage StatusBanco', 'url'=>array('admin')),
+	array('label'=>'Listar StatusBanco', 'url'=>array('index')),
+	array('label'=>'Criar StatusBanco', 'url'=>array('create')),
+	array('label'=>'Atualizar StatusBanco', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Deletar StatusBanco', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Tem certeza que deseja deletar este item?')),
+	array('label'=>'Gerenciar StatusBanco', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View StatusBanco #<?php echo $model->id; ?></h1>
+<h1>Visualizar StatusBanco #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

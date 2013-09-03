@@ -30,8 +30,6 @@ class Master extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id', 'required'),
-			array('id', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>45),
 			array('usuario, senha', 'length', 'max'=>100),
 			// The following rule is used by search().

@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Campos'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Campo', 'url'=>array('index')),
-	array('label'=>'Manage Campo', 'url'=>array('admin')),
+	array('label'=>'Listar Campo', 'url'=>array('index')),
+	array('label'=>'Gerenciar Campo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Campo</h1>
+<h1>Criar Campo</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
