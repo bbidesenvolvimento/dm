@@ -9,16 +9,16 @@
  */
 
 $this->breadcrumbs=array(
-	Yii::t('importcsvModule.importcsv', '')." CSV",
+	Yii::t('importcsvModule.importcsv', 'Import')." CSV",
 );
 ?>
 <div id="importCsvSteps">
     <h1><?php echo Yii::t('importcsvModule.importcsv', 'Importar'); ?> CSV</h1>
 
-    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Arquivo'); ?> :</strong> <span id="importCsvForFile">&nbsp;</span><br/>
-    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Campos'); ?> :</strong> <span id="importCsvForDelimiter">&nbsp;</span><br/>
-    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Textos'); ?> :</strong> <span id="importCsvForTextDelimiter">&nbsp;</span><br/>
-    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Tabela'); ?> :</strong> <span id="importCsvForTable">&nbsp;</span><br/><br/>
+    <strong><?php echo Yii::t('importcsvModule.importcsv', 'File'); ?> :</strong> <span id="importCsvForFile">&nbsp;</span><br/>
+    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Fields Delimiter'); ?> :</strong> <span id="importCsvForDelimiter">&nbsp;</span><br/>
+    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Text Delimiter'); ?> :</strong> <span id="importCsvForTextDelimiter">&nbsp;</span><br/>
+    <strong><?php echo Yii::t('importcsvModule.importcsv', 'Table'); ?> :</strong> <span id="importCsvForTable">&nbsp;</span><br/><br/>
 
     <?php echo CHtml::beginForm('','post',array('enctype'=>'multipart/form-data')); ?>
     <?php echo CHtml::hiddenField("fileName", ""); ?>
@@ -28,25 +28,25 @@ $this->breadcrumbs=array(
         <div id="importCsvFirstStepResult">
             &nbsp;
         </div>
-        <?php  echo CHtml::button(Yii::t('importcsvModule.importcsv', 'Selecione o arquivo CSV'), array("id"=>"importStep1")); ?>
+        <?php  echo CHtml::button(Yii::t('importcsvModule.importcsv', 'Select CSV File'), array("id"=>"importStep1")); ?>
     </div>
     <div id="importCsvSecondStep">
         <div id="importCsvSecondStepResult">
             &nbsp;
         </div>
-        <strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Campos'); ?></strong> <span class="require">*</span><br/>
+        <strong><?php echo Yii::t('importcsvModule.importcsv', 'Fields Delimiter'); ?></strong> <span class="require">*</span><br/>
         <?php echo CHtml::textField("delimiter", $delimiter); ?>
         <br/><br/>
 	
-	<strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Textos'); ?></strong><br/>
+	<strong><?php echo Yii::t('importcsvModule.importcsv', 'Text Delimiter'); ?></strong><br/>
         <?php echo CHtml::textField("textDelimiter", $textDelimiter); ?>
         <br/><br/>
 
-        <strong><?php echo Yii::t('importcsvModule.importcsv', 'Tabela no Banco'); ?></strong> <span class="require">*</span><br/>
+        <strong><?php echo Yii::t('importcsvModule.importcsv', 'Table'); ?></strong> <span class="require">*</span><br/>
         <?php echo CHtml::dropDownList('table', '', $tablesArray);?><br/><br/>
 
         <?php
-        echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Próximo'), '', array(
+        echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Next'), '', array(
             'update' => '#importCsvSecondStepResult',
         ));
         ?>
@@ -66,7 +66,7 @@ $this->breadcrumbs=array(
             <div id="importCsvThirdStepColumnsAndForm">
                 <div id="importCsvThirdStepColumns">&nbsp;</div><br/>
                 <?php
-                    echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Importar'), '', array(
+                    echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Import'), '', array(
                         'update' => '#importCsvThirdStepResult',
                     ));
                 ?>
@@ -74,6 +74,6 @@ $this->breadcrumbs=array(
         <?php echo CHtml::endForm(); ?>
     </div>
     <br/>
-    <span id="importCsvBread1">&laquo; <?php echo CHtml::link(Yii::t('importcsvModule.importcsv', 'Voltar a primeira etapa'), array("/importcsv"));?></span>
-    <span id="importCsvBread2"> &laquo; <a href="javascript:void(0)" id="importCsvA2"><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Campos').", ".Yii::t('importcsvModule.importcsv', 'Text Delimiter')." ".Yii::t('importcsvModule.importcsv', 'and')." ".Yii::t('importcsvModule.importcsv', 'Table');?></a></span>
+    <span id="importCsvBread1">&laquo; <?php echo CHtml::link(Yii::t('importcsvModule.importcsv', 'Start over'), array("/importcsv"));?></span>
+    <span id="importCsvBread2"> &laquo; <a href="javascript:void(0)" id="importCsvA2"><?php echo Yii::t('importcsvModule.importcsv', 'Fields Delimiter').", ".Yii::t('importcsvModule.importcsv', 'Text Delimiter')." ".Yii::t('importcsvModule.importcsv', 'and')." ".Yii::t('importcsvModule.importcsv', 'Table');?></a></span>
 </div>

@@ -1137,7 +1137,7 @@ abstract class CApplication extends CModule
 {
 	public $name='My Application';
 	public $charset='UTF-8';
-	public $sourceLanguage='en_us';
+	public $sourceLanguage='pt_br';
 	private $_id;
 	private $_basePath;
 	private $_runtimePath;
