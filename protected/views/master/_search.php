@@ -31,6 +31,11 @@
 		<?php echo $form->textField($model,'senha',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'ativo'); ?>
+		<?php echo $form->textField($model,'ativo'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>

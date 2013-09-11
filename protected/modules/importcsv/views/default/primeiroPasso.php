@@ -5,6 +5,9 @@
  * @author Artem Demchenkov <lunoxot@mail.ru>
  * @version 0.0.3
  *
+ *
+ *
+ *
  * result of file upload
  */
 
@@ -20,6 +23,6 @@ elseif ($error==0) {
     // No errors. Going to second step
     ?>
     <script type="text/javascript">
-       window.parent.toSecondStep("<?php echo $uploadfile;?>", "<?php echo $delimiterFromFile;?>", "<?php echo $tableFromFile;?>", '<?php echo $textDelimiterFromFile;?>');
+        window.parent.toSecondStep("<?php echo $uploadfile;?>", "<?php echo $delimiterFromFile;?>", "<?php echo $tableFromFile;?>", '<?php echo $textDelimiterFromFile;?>');
     </script>
-<?php } ?>
+    <?php } ?>

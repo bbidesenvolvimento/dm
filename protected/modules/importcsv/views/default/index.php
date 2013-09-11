@@ -8,9 +8,7 @@
  * module form
  */
 
-$this->breadcrumbs=array(
-	Yii::t('importcsvModule.importcsv', 'Import')." CSV",
-    );
+$this->breadcrumbs=array(Yii::t('importcsvModule.importcsv', 'Import')." CSV",);
     ?>
     <div id="importCsvSteps">
         <h1><?php echo Yii::t('importcsvModule.importcsv', 'Importar'); ?> CSV</h1>
@@ -26,13 +24,31 @@ $this->breadcrumbs=array(
 
         <div id="importCsvFirstStep">
             <div id="importCsvFirstStepResult">
-                &nbsp;
+                <div id="loader" style="display:none">Carregando ... <br><img src="images/ajax-loader.gif"></div>
             </div>
+        </div>
+
+        <div id="importCsvSelBase">
+            <div id="importCsvCamposBase">
+            </div>
+            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Cliente'); ?></strong> <span class="require">*</span><br/>
+            <?php echo CHtml::textField("Cliente", $clientes); ?>
+            <br/><br/>
+
+            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Base de Dados'); ?></strong><br/>
+            <?php echo CHtml::textField("Base", $bases); ?>
+            <br/><br/>
+
+            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Tabela'); ?></strong> <span class="require">*</span><br/>
+            <?php echo CHtml::dropDownList('table', '', $tablesArray);?><br/><br/>
+
             <?php  echo CHtml::button(Yii::t('importcsvModule.importcsv', 'Arquivo CSV'), array("id"=>"importStep1")); ?>
         </div>
+
+
+
         <div id="importCsvSecondStep">
             <div id="importCsvSecondStepResult">
-                &nbsp;
             </div>
             <strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Campos'); ?></strong> <span class="require">*</span><br/>
             <?php echo CHtml::textField("delimiter", $delimiter); ?>

@@ -28,31 +28,32 @@ $('.search-form form').submit(function(){
 
 <h1>Gerenciar Clientes</h1>
 
-<p>
-Opcionalmente você pode utiliar simbolos de comparação (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-ou <b>=</b>) no inicio de cada valor para refinar a pesquisa.
-</p>
-
-<?php echo CHtml::link('Busca avançada','#',array('class'=>'search-button')); ?>
+<p>Digite o campo que deseja buscar ou utilize a  <?php echo CHtml::link('Busca avançada','#',array('class'=>'search-button')); ?></p>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+<?php $this->renderPartial('_search',array('model'=>$model,));?>
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cliente-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	'filter'=>$model, 
 	'columns'=>array(
 		'id',
 		'nome',
 		'login',
 		'usuario_tableau',
 		'senha',
-		'master_id',
+		'master.nome',
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{update} {delete}',
+			'buttons'=>array
+		    (
+		        'update' => array
+		        (
+		            'url'=>'Yii::app()->createUrl("cliente/update/", array("id"=>$data->id,"m"=>$data->master_id))',
+		        ),
+		    )
 		),
 	),
 )); ?>

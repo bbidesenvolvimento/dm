@@ -16,7 +16,7 @@ class ClienteController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
-		);
+			);
 	}
 
 	/**
@@ -30,19 +30,19 @@ class ClienteController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
+				),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
-			),
+				),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),
+				),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
-		);
+				),
+			);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class ClienteController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-		));
+			));
 	}
 
 	/**
@@ -67,6 +67,8 @@ class ClienteController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+ 		$masters = Master::model()->findAllByAttributes(array('ativo'=>1));
+
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
@@ -76,6 +78,7 @@ class ClienteController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'masters' => $masters
 		));
 	}
 
@@ -89,18 +92,24 @@ class ClienteController extends Controller
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
+
+		$m = Master::model()->findAllByPk(array('id'=>$_GET['m']));
+		$masters = Master::model()->findAllByAttributes(array('ativo'=>1));
+	
 		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin','id'=>$model->id));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-		));
+			'masters' => $masters,
+			'm' => $m
+			));
 	}
 
 	/**
@@ -123,9 +132,10 @@ class ClienteController extends Controller
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Cliente');
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 
 	/**
@@ -140,7 +150,7 @@ class ClienteController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**

@@ -25,5 +25,6 @@ $this->menu=array(
 		'nome',
 		'usuario',
 		'senha',
+		'ativo',
 	),
 )); ?>

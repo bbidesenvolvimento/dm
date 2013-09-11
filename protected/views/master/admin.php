@@ -26,14 +26,13 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gerenciar Masters</h1>
+<h1>Clientes Master</h1>
 
 <p>
-Opcionalmente você pode utiliar simbolos de comparação (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-ou <b>=</b>) no inicio de cada valor para refinar a pesquisa.
+Digite o campo que deseja buscar ou utilize a  <?php echo CHtml::link('Busca avançada','#',array('class'=>'search-button')); ?>
 </p>
 
-<?php echo CHtml::link('Busca avançada','#',array('class'=>'search-button')); ?>
+
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -49,6 +48,7 @@ ou <b>=</b>) no inicio de cada valor para refinar a pesquisa.
 		'nome',
 		'usuario',
 		'senha',
+		'ativo',
 		array(
 			'class'=>'CButtonColumn',
 		),

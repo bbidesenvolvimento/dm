@@ -8,12 +8,23 @@
  * @property string $nome
  * @property string $usuario
  * @property string $senha
+ * @property integer $ativo
  *
  * The followings are the available model relations:
  * @property Cliente[] $clientes
  */
 class Master extends CActiveRecord
 {
+	/**
+	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
+	 * @return Master the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -30,11 +41,12 @@ class Master extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('ativo', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>45),
 			array('usuario, senha', 'length', 'max'=>100),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, nome, usuario, senha', 'safe', 'on'=>'search'),
+			// Please remove those attributes that should not be searched.
+			array('id, nome, usuario, senha, ativo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,24 +72,18 @@ class Master extends CActiveRecord
 			'nome' => 'Nome',
 			'usuario' => 'Usuario',
 			'senha' => 'Senha',
+			'ativo' => 'Ativo',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -85,20 +91,10 @@ class Master extends CActiveRecord
 		$criteria->compare('nome',$this->nome,true);
 		$criteria->compare('usuario',$this->usuario,true);
 		$criteria->compare('senha',$this->senha,true);
+		$criteria->compare('ativo',$this->ativo);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Master the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
 	}
 }

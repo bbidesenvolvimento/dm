@@ -31,6 +31,8 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'CSV', 'url'=>array('/importcsv'),'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Clientes', 'url'=>array('/cliente/admin'),'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Clientes Master', 'url'=>array('/master/admin'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Banco', 'url'=>array('/banco'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Status Banco', 'url'=>array('/statusBanco'),'visible'=>(Yii::app()->user->id=='admin' ? 1 : 0)),
 				array('label'=>'Campos', 'url'=>array('/campo'),'visible'=>!Yii::app()->user->isGuest),

@@ -21,5 +21,9 @@
 	<?php echo CHtml::encode($data->senha); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('ativo')); ?>:</b>
+	<?php echo CHtml::encode($data->ativo); ?>
+	<br />
+
 
 </div>

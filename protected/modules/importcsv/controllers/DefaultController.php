@@ -89,177 +89,180 @@ class DefaultController extends Controller {
 
     	$tables = Yii::app()->getDb()->getSchema()->getTableNames();
 
-    	$tablesLength = sizeof($tables);
-    	$tablesArray = array();
-    	for ($i = 0; $i < $tablesLength; $i++) {
-    		$tablesArray[$tables[$i]] = $tables[$i];
-    	}
+        $tablesLength = sizeof($tables);
+        $tablesArray = array();
+        for ($i = 0; $i < $tablesLength; $i++) {
+          $tablesArray[$tables[$i]] = $tables[$i];
+      }
 
-    	if (Yii::app()->request->isAjaxRequest) {
-    		if ($_POST['thirdStep'] != 1) {
+      if (Yii::app()->request->isAjaxRequest) {
+          if ($_POST['thirdStep'] != 1) {
 
 		//second step
 
-    			$delimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['delimiter']))));
-    			$textDelimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['textDelimiter']))));
-    			$table = CHtml::encode($_POST['table']);
+             $delimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['delimiter']))));
+             $textDelimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['textDelimiter']))));
+             $table = CHtml::encode($_POST['table']);
 
-    			if ($_POST['delimiter'] == '') {
-    				$error = 1;
-    				$csvFirstLine = array();
-    				$paramsArray = array();
-    			} else {
+
+             if ($_POST['delimiter'] == '') {
+                $error = 1;
+                $csvFirstLine = array();
+                $paramsArray = array();
+            } else {
 		    // get all columns from csv file
 
-    				$error = 0;
-    				$uploaddir = Yii::app()->controller->module->path;
-    				$uploadfile = $uploaddir . basename($_POST['fileName']);
-    				$file = fopen($uploadfile, "r");
-    				$csvFirstLine = ($textDelimiter) ? fgetcsv($file, 0, $delimiter, $textDelimiter) : fgetcsv($file, 0, $delimiter);
-    				fclose($file);
+                $error = 0;
+                $uploaddir = Yii::app()->controller->module->path;
+                $uploadfile = $uploaddir . basename($_POST['fileName']);
+                $file = fopen($uploadfile, "r");
+                $csvFirstLine = ($textDelimiter) ? fgetcsv($file, 0, $delimiter, $textDelimiter) : fgetcsv($file, 0, $delimiter);
+                fclose($file);
 
 		    // checking file with earlier imports
 
-    				$paramsArray = $this->checkOldFile($uploadfile);
-    			}
+                $paramsArray = $this->checkOldFile($uploadfile);
+            }
 
 		//get all columns from selected table
 
-    			$model = new ImportCsv;
-    			$tableColumns = $model->tableColumns($table);
+            $model = new ImportCsv;
+            $tableColumns = $model->tableColumns($table);
 
-    			$this->layout = 'clear';
-    			$this->render('secondResult', array(
-    				'error' => $error,
-    				'tableColumns' => $tableColumns,
-    				'delimiter' => $delimiter,
-    				'textDelimiter' => $textDelimiter,
-    				'table' => $table,
-    				'fromCsv' => $csvFirstLine,
-    				'paramsArray' => $paramsArray,
-    				));
-    		} else {
+            $this->layout = 'clear';
+            $this->render('secondResult', array(
+                'error' => $error,
+                'tableColumns' => $tableColumns,
+                'delimiter' => $delimiter,
+                'textDelimiter' => $textDelimiter,
+                'table' => $table,
+                'fromCsv' => $csvFirstLine,
+                'paramsArray' => $paramsArray,
+                ));
+        } else {
 
 		//third step
-    			$delimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['thirdDelimiter']))));
-    			$textDelimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['thirdTextDelimiter']))));
-    			$table = CHtml::encode($_POST['thirdTable']);
-    			$uploadfile = CHtml::encode(trim($_POST['thirdFile']));
-    			$columns = $_POST['Columns'];
-    			$perRequest = CHtml::encode($_POST['perRequest']);
-    			$tableKey = CHtml::encode($_POST['Tablekey']);
-    			$csvKey = CHtml::encode($_POST['CSVkey']);
-    			$mode = CHtml::encode($_POST['Mode']);
-    			$insertArray = array();
-    			$error_array = array();
+         $delimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['thirdDelimiter']))));
+         $textDelimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['thirdTextDelimiter']))));
+         $table = CHtml::encode($_POST['thirdTable']);
+         $uploadfile = CHtml::encode(trim($_POST['thirdFile']));
+         $columns = $_POST['Columns'];
+         $perRequest = CHtml::encode($_POST['perRequest']);
+         $tableKey = CHtml::encode($_POST['Tablekey']);
+         $csvKey = CHtml::encode($_POST['CSVkey']);
+         $mode = CHtml::encode($_POST['Mode']);
+         $insertArray = array();
+         $error_array = array();
 
-    			if (array_sum($_POST['Columns']) > 0) {
-    				if ($_POST['perRequest'] != '') {
-    					if (is_numeric($_POST['perRequest'])) {
+         if (array_sum($_POST['Columns']) > 0) {
+            if ($_POST['perRequest'] != '') {
+               if (is_numeric($_POST['perRequest'])) {
 
 
-    						if (($mode == 2 || $mode == 3) && ($tableKey == '' || $csvKey == '')) {
-    							$error = 4;
-    						} else {
-    							$error = 0;
+
+
+                  if (($mode == 2 || $mode == 3) && ($tableKey == '' || $csvKey == '')) {
+                     $error = 4;
+                 } else {
+                     $error = 0;
 
 
 				//import from csv to db
 
-    							$model = new ImportCsv;
-    							$tableColumns = $model->tableColumns($table);
+                     $model = new ImportCsv;
+                     $tableColumns = $model->tableColumns($table);
 
 				//select old rows from table
 
-    							if ($mode == 2 || $mode == 3) {
-    								$oldItems = $model->selectRows($table, $tableKey);
-    							}
+                     if ($mode == 2 || $mode == 3) {
+                        $oldItems = $model->selectRows($table, $tableKey);
+                    }
 
-    							$filecontent = file($uploadfile);
-    							$lengthFile = sizeof($filecontent);
-    							$insertCounter = 0;
-    							$stepsOk = 0;
+                    $filecontent = file($uploadfile);
+                    $lengthFile = sizeof($filecontent);
+                    $insertCounter = 0;
+                    $stepsOk = 0;
 
 				// begin transaction
 
-    							$transaction = Yii::app()->db->beginTransaction();
-    							try {
+                    $transaction = Yii::app()->db->beginTransaction();
+                    try {
 
 				    // import to database
 
-    								for ($i = 0; $i < $lengthFile; $i++) {
-    									if ($i != 0 && $filecontent[$i] != '') {
-    										$csvLine = ($textDelimiter) ? str_getcsv($filecontent[$i], $delimiter, $textDelimiter) : str_getcsv($filecontent[$i], $delimiter);
+                        for ($i = 0; $i < $lengthFile; $i++) {
+                           if ($i != 0 && $filecontent[$i] != '') {
+                              $csvLine = ($textDelimiter) ? str_getcsv($filecontent[$i], $delimiter, $textDelimiter) : str_getcsv($filecontent[$i], $delimiter);
 
 					    //Mode 1. insert All
-    										
-    										if ($mode == 1) {
-    											$insertArray[] = $csvLine;
-    											$insertCounter++;
-    											
-    											if ($insertCounter == $perRequest || $i == $lengthFile - 1) {
-    												$import = $model->InsertAll($table, $insertArray, $columns, $tableColumns);
-    												$insertCounter = 0;
-    												$insertArray = array();
 
-    												if ($import != 1)
-    													$arrays[] = $i;
-    											}
-    										}
+                              if ($mode == 1) {
+                                 $insertArray[] = $csvLine;
+                                 $insertCounter++;
+
+                                 if ($insertCounter == $perRequest || $i == $lengthFile - 1) {
+                                    $import = $model->InsertAll($table, $insertArray, $columns, $tableColumns);
+                                    $insertCounter = 0;
+                                    $insertArray = array();
+
+                                    if ($import != 1)
+                                       $arrays[] = $i;
+                               }
+                           }
 
 					    // Mode 2. Insert new
 
-    										if ($mode == 2) {
-    											if ($csvLine[$csvKey - 1] == '' || !$this->searchInOld($oldItems, $csvLine[$csvKey - 1], $tableKey)) {
-    												$insertArray[] = $csvLine;
-    												$insertCounter++;
-    												if ($insertCounter == $perRequest || $i == $lengthFile - 1) {
-    													$import = $model->InsertAll($table, $insertArray, $columns, $tableColumns);
-    													$insertCounter = 0;
-    													$insertArray = array();
+                           if ($mode == 2) {
+                             if ($csvLine[$csvKey - 1] == '' || !$this->searchInOld($oldItems, $csvLine[$csvKey - 1], $tableKey)) {
+                                $insertArray[] = $csvLine;
+                                $insertCounter++;
+                                if ($insertCounter == $perRequest || $i == $lengthFile - 1) {
+                                   $import = $model->InsertAll($table, $insertArray, $columns, $tableColumns);
+                                   $insertCounter = 0;
+                                   $insertArray = array();
 
-    													if ($import != 1)
-    														$arrays[] = $i;
-    												}
-    											}
-    										}
+                                   if ($import != 1)
+                                      $arrays[] = $i;
+                              }
+                          }
+                      }
 
 					    // Mode 3. Insert new and replace old
 
-    										if ($mode == 3) {
-    											if ($csvLine[$csvKey - 1] == '' || !$this->searchInOld($oldItems, $csvLine[$csvKey - 1], $tableKey)) {
+                      if ($mode == 3) {
+                         if ($csvLine[$csvKey - 1] == '' || !$this->searchInOld($oldItems, $csvLine[$csvKey - 1], $tableKey)) {
 
 						    // insert new
-    												$insertArray[] = $csvLine;
-    												$insertCounter++;
-    												if ($insertCounter == $perRequest || $i == $lengthFile - 1) {
-    													$import = $model->InsertAll($table, $insertArray, $columns, $tableColumns);
-    													$insertCounter = 0;
-    													$insertArray = array();
+                            $insertArray[] = $csvLine;
+                            $insertCounter++;
+                            if ($insertCounter == $perRequest || $i == $lengthFile - 1) {
+                               $import = $model->InsertAll($table, $insertArray, $columns, $tableColumns);
+                               $insertCounter = 0;
+                               $insertArray = array();
 
-    													if ($import != 1)
-    														$arrays[] = $i;
-    												}
-    											}
-    											else {
+                               if ($import != 1)
+                                  $arrays[] = $i;
+                          }
+                      }
+                      else {
 
 						    //replace old
 
-    												$import = $model->updateOld($table, $csvLine, $columns, $tableColumns, $csvLine[$csvKey - 1], $tableKey);
+                        $import = $model->updateOld($table, $csvLine, $columns, $tableColumns, $csvLine[$csvKey - 1], $tableKey);
 
-    												if ($import != 1)
-    													$arrays[] = $i;
-    											}
-    										}
-    									}
-    								}
+                        if ($import != 1)
+                           $arrays[] = $i;
+                   }
+               }
+           }
+       }
 
-    								if ($insertCounter != 0)
-    									$model->InsertAll($table, $insertArray, $columns, $tableColumns);
+       if ($insertCounter != 0)
+           $model->InsertAll($table, $insertArray, $columns, $tableColumns);
 
 				    // commit transaction if not exception
 
-    								$transaction->commit();
+       $transaction->commit();
 				} catch (Exception $e) { // exception in transaction
 					$transaction->rollBack();
 				}
@@ -291,12 +294,16 @@ $this->render('thirdResult', array(
 Yii::app()->end();
 } else {
 	    // first loading
+    $bases = 0;
+    $clientes = 0;
 
-	$this->render('index', array(
-		'delimiter' => $delimiter,
-		'textDelimiter' => $textDelimiter,
-		'tablesArray' => $tablesArray,
-		));
+    $this->render('index', array(
+        'bases' => $bases,
+        'clientes' => $clientes,
+        'delimiter' => $delimiter,
+        'textDelimiter' => $textDelimiter,
+        'tablesArray' => $tablesArray,
+        ));
 }
 }
 
@@ -330,17 +337,25 @@ Yii::app()->end();
     	$delimiterFromFile = $paramsArray['delimiter'];
     	$textDelimiterFromFile = $paramsArray['textDelimiter'];
     	$tableFromFile = $paramsArray['table'];
+        $bases = 0;
+        $clientes = 0;
 
 	// view rendering
 
-    	$this->layout = 'clear';
-    	$this->render('firstResult', array(
-    		'error' => $importError,
-    		'uploadfile' => $uploadfile,
-    		'delimiterFromFile' => $delimiterFromFile,
-    		'textDelimiterFromFile' => $textDelimiterFromFile,
-    		'tableFromFile' => $tableFromFile,
-    		));
+        //var_dump($uploadfile);die();
+
+
+    	//$this->layout = 'clear';
+        $this->layout = 'passo1';
+        $this->render('firstResult', array(
+          'error' => $importError,
+          'uploadfile' => $uploadfile,
+          'delimiterFromFile' => $delimiterFromFile,
+          'textDelimiterFromFile' => $textDelimiterFromFile,
+          'tableFromFile' => $tableFromFile,
+          'bases' => $bases,
+          'clientes' => $clientes,
+          ));
     }
 
     /*

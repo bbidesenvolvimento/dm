@@ -70,8 +70,10 @@ class MasterController extends Controller
 		if(isset($_POST['Master']))
 		{
 			$model->attributes=$_POST['Master'];
+			//var_dump($model->attributes);die();
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				//$this->redirect(array('view','id'=>$model->id));
+				$this->redirect('admin');
 		}
 
 		$this->render('create',array(
