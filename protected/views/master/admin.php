@@ -8,8 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Master', 'url'=>array('index')),
-	array('label'=>'Criar Master', 'url'=>array('create')),
+	array('label'=>'Novo Cliente Master', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -44,13 +43,15 @@ Digite o campo que deseja buscar ou utilize a  <?php echo CHtml::link('Busca ava
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
+		//'id',
 		'nome',
 		'usuario',
 		'senha',
 		'ativo',
 		array(
-			'class'=>'CButtonColumn',
+			'template'=>'{update} {delete}',
+			'header' => 'Opções',
+			'class'=>'CButtonColumn'
 		),
 	),
 )); ?>

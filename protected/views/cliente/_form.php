@@ -40,11 +40,11 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'master_id'); ?>
-		<?php $lmaster = CHtml::listData($masters,'id','nome');?>
-		<?php if($model->isNewRecord) :  ?>
+	<?php echo $form->labelEx($model,'master_id'); ?>
+	<?php $lmaster = CHtml::listData($masters,'id','nome');?>
+	<?php if($model->isNewRecord) :  ?>
 		<?php echo CHtml::dropDownList('Cliente[master_id]','nome',$lmaster,array('prompt' => 'Selecione'));?>
-		<?php else: ?>
+			<?php else: ?>
 		<?php $lm = CHtml::listData($m,'id','nome');?>
 		<?php echo CHtml::dropDownList('Cliente[master_id]','nome',$lmaster,array('options' => array(key($lm) => array('selected'=>true))));?>
 	<?php endif; ?>

@@ -68,7 +68,7 @@ class Master extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			//'id' => 'ID',
 			'nome' => 'Nome',
 			'usuario' => 'Usuario',
 			'senha' => 'Senha',

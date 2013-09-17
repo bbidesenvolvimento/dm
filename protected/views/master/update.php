@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Atualizar Master <?php echo $model->id; ?></h1>
+<h1>Atualizar Master <i><?php echo $model->nome; ?></i></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

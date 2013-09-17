@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Cliente', 'url'=>array('index')),
-	array('label'=>'Criar Cliente', 'url'=>array('create')),
-	array('label'=>'Visualizar Cliente', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Gerenciar Cliente', 'url'=>array('admin')),
+//	array('label'=>'Listar Cliente', 'url'=>array('index')),
+//	array('label'=>'Criar Cliente', 'url'=>array('create')),
+//	array('label'=>'Visualizar Cliente', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Voltar', 'url'=>array('admin')),
 );
 ?>
 

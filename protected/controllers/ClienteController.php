@@ -63,23 +63,48 @@ class ClienteController extends Controller
 	public function actionCreate()
 	{
 		$model=new Cliente;
-
+		$banco=new Banco;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
- 		$masters = Master::model()->findAllByAttributes(array('ativo'=>1));
+		$masters = Master::model()->findAllByAttributes(array('ativo'=>1));
 
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$nome_base = trim('bbi_'.$_POST['Cliente']['login']);
+			$sql = "CREATE SCHEMA ".$nome_base." DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+			
+			//Registra cliente
+			if($model->save()){
+				//Registra base
+				$banco->nome=$nome_base;
+				$banco->status_banco_id = 1;
+				$banco->cliente_id = $model->getPrimaryKey();
+				if($banco->save()){
+					//Cria Base de Dados no servidor e muda a collation
+					$command=Yii::app()->db->beginTransaction();
+					try
+					{	
+						Yii::app()->db->createCommand($sql)->execute();
+						$command->commit();
+					}
+					catch(Exception $e)
+					{
+						echo "Erro ao criar base de dados. Verifique nome da base: ".$e->getMessage()."\n";
+						$command->rollback();
+						return false;
+					}
+					//Volta para o admin
+					$this->redirect(array('admin'));
+				}
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 			'masters' => $masters
-		));
+			));
 	}
 
 	/**
@@ -90,12 +115,9 @@ class ClienteController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-
 		$m = Master::model()->findAllByPk(array('id'=>$_GET['m']));
 		$masters = Master::model()->findAllByAttributes(array('ativo'=>1));
-	
+
 		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Cliente']))
@@ -119,11 +141,21 @@ class ClienteController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		$base = Banco::model()->findByAttributes(array('cliente_id' => $id));
+
+		$sql = 'DROP SCHEMA `'.$base->nome.'`;';
+		$command=Yii::app()->db->createCommand($sql);
+		$command->execute();
+
+		$banco = Banco::model()->deleteAllByAttributes(array('cliente_id' => $id));
+
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
+		if(!isset($_GET['ajax'])){
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			
+		}
 	}
 
 	/**

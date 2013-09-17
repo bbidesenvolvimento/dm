@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Cliente', 'url'=>array('index')),
-	array('label'=>'Criar Cliente', 'url'=>array('create')),
+	//array('label'=>'Listar Cliente', 'url'=>array('index')),
+	array('label'=>'Novo Cliente', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -38,15 +38,17 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model, 
 	'columns'=>array(
-		'id',
+		//'id',
 		'nome',
 		'login',
 		'usuario_tableau',
 		'senha',
-		'master.nome',
+		array('name'=>'master.nome', 
+              'header'=>'Cliente Master'),
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{update} {delete}',
+			'header' => 'Opções',
 			'buttons'=>array
 		    (
 		        'update' => array

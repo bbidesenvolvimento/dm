@@ -23,7 +23,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status_banco_id'); ?>
-		<?php echo $form->textField($model,'status_banco_id'); ?>
+		<?php //echo $form->textField($model,'status_banco_id'); ?>
+		<?php echo $form->CheckBox($model,'status_banco_id',array('checked'=>'checked')); ?>
 		<?php echo $form->error($model,'status_banco_id'); ?>
 	</div>
 

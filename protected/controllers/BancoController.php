@@ -70,6 +70,9 @@ class BancoController extends Controller
 		if(isset($_POST['Banco']))
 		{
 			$model->attributes=$_POST['Banco'];
+			/*$status_banco = StatusBanco::model()->findAll();
+			$clientes = Clientes::model()->findAllByAttributes(array('ativo'=>1));*/
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
