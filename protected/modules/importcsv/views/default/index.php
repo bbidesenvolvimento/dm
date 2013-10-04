@@ -7,16 +7,14 @@
  *
  * module form
  */
+$this->breadcrumbs=array(Yii::t('importcsvModule.importcsv', 'Import')." CSV",);?>
 
-$this->breadcrumbs=array(Yii::t('importcsvModule.importcsv', 'Import')." CSV",);
-    ?>
     <div id="importCsvSteps">
         <h1><?php echo Yii::t('importcsvModule.importcsv', 'Importar'); ?> CSV</h1>
 
         <strong><?php echo Yii::t('importcsvModule.importcsv', 'Arquivo'); ?> :</strong> <span id="importCsvForFile">&nbsp;</span><br/>
         <strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Campos'); ?> :</strong> <span id="importCsvForDelimiter">&nbsp;</span><br/>
         <strong><?php echo Yii::t('importcsvModule.importcsv', 'Delimitador de Textos'); ?> :</strong> <span id="importCsvForTextDelimiter">&nbsp;</span><br/>
-        <strong><?php echo Yii::t('importcsvModule.importcsv', 'Table'); ?> :</strong> <span id="importCsvForTable">&nbsp;</span><br/><br/>
 
         <?php echo CHtml::beginForm('','post',array('enctype'=>'multipart/form-data')); ?>
         <?php echo CHtml::hiddenField("fileName", ""); ?>
@@ -27,22 +25,25 @@ $this->breadcrumbs=array(Yii::t('importcsvModule.importcsv', 'Import')." CSV",);
                 <div id="loader" style="display:none">Carregando ... <br><img src="images/ajax-loader.gif"></div>
             </div>
         </div>
+        <br/><br/>
 
         <div id="importCsvSelBase">
             <div id="importCsvCamposBase">
+                <strong><?php echo Yii::t('importcsvModule.importcsv', 'Cliente'); ?></strong> <span class="require">*</span><br/>
+                <?php $lclientes = CHtml::listData($cli,'id','nome'); ?>
+                <?php echo CHtml::dropDownList('Cli[id]','nome',$lclientes,
+                                    array('prompt' => 'Selecione',
+                                          'ajax' => array('type'=>'POST', 
+                                                          'url'=>CController::createUrl('loadTabelas'),
+                                                          'update'=>'#table',
+                                                          'data'=>array('id_cliente'=>'js:this.value'))));?><br/><br/>
+                <strong><?php echo Yii::t('importcsvModule.importcsv', 'Selecione o Arquivo'); ?></strong><br/>
+                <?php echo CHtml::button(Yii::t('importcsvModule.importcsv', 'Arquivo CSV'), array("id"=>"importStep1"));?><br/>
+                <br/><br/>
             </div>
-            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Cliente'); ?></strong> <span class="require">*</span><br/>
-            <?php echo CHtml::textField("Cliente", $clientes); ?>
-            <br/><br/>
-
-            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Base de Dados'); ?></strong><br/>
-            <?php echo CHtml::textField("Base", $bases); ?>
-            <br/><br/>
-
-            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Tabela'); ?></strong> <span class="require">*</span><br/>
-            <?php echo CHtml::dropDownList('table', '', $tablesArray);?><br/><br/>
-
-            <?php  echo CHtml::button(Yii::t('importcsvModule.importcsv', 'Arquivo CSV'), array("id"=>"importStep1")); ?>
+            
+            <!--strong><?php //echo Yii::t('importcsvModule.importcsv', 'Tabela'); ?></strong> <span class="require">*</span><br/-->
+            <?php //echo CHtml::dropDownList('table', '', $tablesArray);?>
         </div>
 
 
@@ -58,15 +59,20 @@ $this->breadcrumbs=array(Yii::t('importcsvModule.importcsv', 'Import')." CSV",);
             <?php echo CHtml::textField("textDelimiter", $textDelimiter); ?>
             <br/><br/>
 
-            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Tabela'); ?></strong> <span class="require">*</span><br/>
-            <?php echo CHtml::dropDownList('table', '', $tablesArray);?><br/><br/>
+            <!--strong><?php //echo Yii::t('importcsvModule.importcsv', 'Tabela'); ?></strong> <span class="require">*</span><br/>
+            <?php //echo CHtml::dropDownList('table', '', $tablesArray);?><br/><br/-->
 
-            <?php
-            echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Próximo'), '', array(
-                'update' => '#importCsvSecondStepResult',
-                ));
-                ?>
-            </div>
+
+            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Selecione o Método'); ?></strong><br/><br/>
+            <?php echo CHtml::radioButtonList('','gender', array('Nova Tabela','Utilizar existente')); ?> <br/><br/>
+
+            
+            <strong><?php echo Yii::t('importcsvModule.importcsv', 'Selecione a Tabela'); ?></strong><br/>
+            <?php echo CHtml::dropDownList('table','nome', array(), array('prompt'=>'Selecione'));?>
+            <br/><br/>
+
+            <?php echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Próximo'), '', array('update' => '#importCsvSecondStepResult',));?>
+        </div>
             <?php echo CHtml::endForm(); ?>
 
             <div id="importCsvThirdStep">
@@ -81,11 +87,7 @@ $this->breadcrumbs=array(Yii::t('importcsvModule.importcsv', 'Import')." CSV",);
                 </div>
                 <div id="importCsvThirdStepColumnsAndForm">
                     <div id="importCsvThirdStepColumns">&nbsp;</div><br/>
-                    <?php
-                    echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Importar'), '', array(
-                        'update' => '#importCsvThirdStepResult',
-                        ));
-                        ?>
+                    <?php echo CHtml::ajaxSubmitButton(Yii::t('importcsvModule.importcsv', 'Importar'), '', array('update' => '#importCsvThirdStepResult',));?>
                     </div>
                     <?php echo CHtml::endForm(); ?>
                 </div>

@@ -5,6 +5,7 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Data Minning BBI',
@@ -75,7 +76,7 @@ return array(
 			'username' => 'root',
 			'password' => 'root',
 			'charset' => 'utf8',
-		),
+		), 
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

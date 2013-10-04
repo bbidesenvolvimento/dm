@@ -11,12 +11,10 @@
 if($error==1) {
     // first error: Unable to upload file
     echo("<span class='importCsvError'>".Yii::t('importcsvModule.importcsv', 'Erro').": ".Yii::t('importcsvModule.importcsv', 'Falha no UPLOAD')."</span>");
-}
-elseif ($error==2) {
+} elseif ($error==2) {
     // second error: Download file is not a .csv
     echo("<span class='importCsvError'>".Yii::t('importcsvModule.importcsv', 'Erro').": ".Yii::t('importcsvModule.importcsv', 'Arquivo não é um  .csv')."</span>");
-}
-elseif ($error==0) {
+} elseif ($error==0) {
     // No errors. Going to second step
     ?>
     <script type="text/javascript">

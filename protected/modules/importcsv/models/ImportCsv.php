@@ -168,6 +168,23 @@ class ImportCsv extends CFormModel
     }
 
     /*
+     * get columns from selected table
+     * $table - db table
+     * @return array list of db columns
+     *
+     */
+
+    public function tableColumns2($table,$base)
+    {
+
+       // Fecha a conexao atual
+        Yii::app()->db->setActive(false);
+        Yii::app()->db->connectionString = 'mysql:host=localhost;dbname=' . $base;
+       return Yii::app()->getDb()->getSchema()->getTable($table)->getColumnNames();
+       // Yii::app()->db->setActive(true);
+    }
+
+    /*
      * get attribute from all rows from selected table
      *
      * $table - db table

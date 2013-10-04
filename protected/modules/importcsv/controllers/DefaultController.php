@@ -52,6 +52,9 @@
  *
 */
 
+/* @var $dataProvider CActiveDataProvider */
+/* @var $model Cliente */
+
 class DefaultController extends Controller {
 
 	public $colsArray = array();
@@ -60,10 +63,48 @@ class DefaultController extends Controller {
      * action for form
      */
 
+    public function actionLoadtabelas(){
+       $bancos =  Banco::model()->findAll('cliente_id=:cliente_id', array(':cliente_id'=>(int) $_POST['id_cliente']));
+       //tableNames
+       $data=CHtml::listData($bancos,'id','nome');
+
+       // Base de acordo com o cliente selecionado
+       $base = reset($data);
+       session_start();
+       $_SESSION['base'] = $base;
+
+       $dmbbi = 'dmbbi';
+
+       // Fecha a conexao atual
+        Yii::app()->db->setActive(false);
+        Yii::app()->db->connectionString = 'mysql:host=localhost;dbname=' . $base;
+        Yii::app()->db->setActive(true);
+
+        // Acha as tabelas do banco
+       $tables = Yii::app()->getDb()->getSchema()->getTableNames();
+
+       echo CHtml::hiddenField("banco", $base); 
+
+       echo "<option value=''>Selecione ...</option>";
+       foreach($tables as $value=>$table)
+        echo CHtml::tag('option', array('value'=>CHtml::encode($table)),CHtml::encode($table),true);
+
+//        Yii::app()->db->setActive(false);
+//        Yii::app()->db->connectionString = 'mysql:host=localhost;dbname=' . $dmbbi;
+//        Yii::app()->db->setActive(true);
+
+    }
+
+    public function actionTabelaSel(){
+        //echo CHtml::tag('option', array('value'=>CHtml::encode($table)),CHtml::encode($table),true);
+        echo CHtml::textField("tabelaSel", '');
+    }
+
     public function actionIndex() {
+       
     	$delimiter = ";";
     	$textDelimiter = '"';
-	//publish css and js
+	   //publish css and js
 
     	Yii::app()->clientScript->registerCssFile(
     		Yii::app()->assetManager->publish(
@@ -85,9 +126,28 @@ class DefaultController extends Controller {
     			)
     		);
 
-	//getting all tables from db
-
+    	//getting all tables from db
     	$tables = Yii::app()->getDb()->getSchema()->getTableNames();
+
+        $list= Yii::app()->db->createCommand('select id,nome from cliente;')->queryAll();
+
+        $rs=array();
+         foreach($list as $k=>$v){
+            $rs[]=$list[$k];
+
+         }
+         $cli = $rs;
+        //echo "<pre>";var_dump($rs);die();
+
+        /* $list= Yii::app()->db->createCommand('SHOW DATABASES')->queryAll();
+        $rs=array();
+         foreach($list as $k=>$v){
+            $rs[]=$list[$k]['Database'];
+         }
+
+        $arr = array_diff($rs, array('information_schema', 'mysql','performance_schema','phpmyadmin'));*/
+
+        //$model->findAllByAttributes(array('ativo'=>1));
 
         $tablesLength = sizeof($tables);
         $tablesArray = array();
@@ -103,6 +163,7 @@ class DefaultController extends Controller {
              $delimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['delimiter']))));
              $textDelimiter = str_replace('&quot;', '"', str_replace("&#039;", "'", CHtml::encode(trim($_POST['textDelimiter']))));
              $table = CHtml::encode($_POST['table']);
+             //$banco = CHtml::encode($_POST['banco']);
 
 
              if ($_POST['delimiter'] == '') {
@@ -119,15 +180,24 @@ class DefaultController extends Controller {
                 $csvFirstLine = ($textDelimiter) ? fgetcsv($file, 0, $delimiter, $textDelimiter) : fgetcsv($file, 0, $delimiter);
                 fclose($file);
 
-		    // checking file with earlier imports
+            // checking file with earlier imports
 
                 $paramsArray = $this->checkOldFile($uploadfile);
             }
 
-		//get all columns from selected table
+        //get all columns from selected table
+            header("Content-Type: text/html; charset=ISO-8859-1",true);
+            session_start();
+            $base = $_SESSION['base'];
+
+            $colunas = array($csvFirstLine);
+            
+            var_dump($_POST);
 
             $model = new ImportCsv;
-            $tableColumns = $model->tableColumns($table);
+            $tableColumns = $model->tableColumns2($table,$base);
+
+
 
             $this->layout = 'clear';
             $this->render('secondResult', array(
@@ -135,7 +205,7 @@ class DefaultController extends Controller {
                 'tableColumns' => $tableColumns,
                 'delimiter' => $delimiter,
                 'textDelimiter' => $textDelimiter,
-                'table' => $table,
+                'table' => $_POST['table'],
                 'fromCsv' => $csvFirstLine,
                 'paramsArray' => $paramsArray,
                 ));
@@ -167,13 +237,11 @@ class DefaultController extends Controller {
                      $error = 0;
 
 
-				//import from csv to db
-
+    				//import from csv to db
                      $model = new ImportCsv;
                      $tableColumns = $model->tableColumns($table);
 
-				//select old rows from table
-
+    				//select old rows from table
                      if ($mode == 2 || $mode == 3) {
                         $oldItems = $model->selectRows($table, $tableKey);
                     }
@@ -183,19 +251,16 @@ class DefaultController extends Controller {
                     $insertCounter = 0;
                     $stepsOk = 0;
 
-				// begin transaction
-
+    				// begin transaction
                     $transaction = Yii::app()->db->beginTransaction();
                     try {
 
 				    // import to database
-
                         for ($i = 0; $i < $lengthFile; $i++) {
                            if ($i != 0 && $filecontent[$i] != '') {
                               $csvLine = ($textDelimiter) ? str_getcsv($filecontent[$i], $delimiter, $textDelimiter) : str_getcsv($filecontent[$i], $delimiter);
 
 					    //Mode 1. insert All
-
                               if ($mode == 1) {
                                  $insertArray[] = $csvLine;
                                  $insertCounter++;
@@ -211,7 +276,6 @@ class DefaultController extends Controller {
                            }
 
 					    // Mode 2. Insert new
-
                            if ($mode == 2) {
                              if ($csvLine[$csvKey - 1] == '' || !$this->searchInOld($oldItems, $csvLine[$csvKey - 1], $tableKey)) {
                                 $insertArray[] = $csvLine;
@@ -227,8 +291,7 @@ class DefaultController extends Controller {
                           }
                       }
 
-					    // Mode 3. Insert new and replace old
-
+    				    // Mode 3. Insert new and replace old
                       if ($mode == 3) {
                          if ($csvLine[$csvKey - 1] == '' || !$this->searchInOld($oldItems, $csvLine[$csvKey - 1], $tableKey)) {
 
@@ -300,6 +363,7 @@ Yii::app()->end();
     $this->render('index', array(
         'bases' => $bases,
         'clientes' => $clientes,
+        'cli' => $cli,
         'delimiter' => $delimiter,
         'textDelimiter' => $textDelimiter,
         'tablesArray' => $tablesArray,
@@ -345,8 +409,8 @@ Yii::app()->end();
         //var_dump($uploadfile);die();
 
 
-    	//$this->layout = 'clear';
-        $this->layout = 'passo1';
+    	$this->layout = 'clear';
+        //$this->layout = 'passo1';
         $this->render('firstResult', array(
           'error' => $importError,
           'uploadfile' => $uploadfile,
